@@ -5,8 +5,8 @@ export default class EnhancedPromise extends Promise {
         const errors = [];
         const result = [];
         
-        if (rejects < 0) return EnhancedPromise.reject(new Error());
-        if (rejects === 0) return EnhancedPromise.resolve(result);
+        if (rejects < 0) { return EnhancedPromise.reject(new Error()); }
+        if (rejects === 0) { return EnhancedPromise.resolve(result); }
 
         return new EnhancedPromise((resolve, reject) => {
             promises.map(prom => {
