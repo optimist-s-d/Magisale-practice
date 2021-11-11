@@ -22,14 +22,15 @@ export default class Cart {
         this.loading = true;
         this._notify();
 
-        return window
-            .fetch(url, params)
+        return window.fetch(url, params)
             .then(status)
             .then(response => (response.status === 200 ? response.json() : null))
+            .then(middleware)
             .then(() => {
                 this.loading = false;
                 this._notify();
-            });
+            })
+            .catch(err => new Error(err.message));
     }
 
     _notify() {
@@ -45,11 +46,13 @@ export default class Cart {
     }
 
     getTotalQuantity() {
-        return this.items.length;
+        return this.items.length !== 0
+            ? this.items.map(item => item.quantity).reduce((sum, el) => sum + el, 0)
+            : 0;
     }
 
     getTotalPrice() {
-        return this.item.length !== 0
+        return this.items.length !== 0
             ? this.items.map(item => item.price).reduce((sum, el) => sum + el, 0)
             : 0;
     }
@@ -91,5 +94,13 @@ export default class Cart {
     }
 }
 
+/*
+{
+    "id": 1,
+    "name": "Item 1",
+    "price": 15,
+    "quantity": 10
+}
 
-// { "id": 1, "name": "Item 1", "price": 15, "quantity": 10 }
+
+*/
