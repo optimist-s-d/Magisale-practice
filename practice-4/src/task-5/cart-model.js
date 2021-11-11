@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import Subject from "./subject.js";
 import { status } from "../task-1.js";
 
