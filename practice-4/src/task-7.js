@@ -7,7 +7,7 @@ export default function getSequential(urls) {
         urls.map(url => {
             getJSON(url).then(response => {
                 result.push(response);
-                if (result.length === urls.length) resolve(result);
+                if (result.length === urls.length) { resolve(result); }
             }).catch(() => {
                 reject(new Error(`failed to fetch ${url}`));
             });
