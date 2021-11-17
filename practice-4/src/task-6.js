@@ -19,7 +19,7 @@ export default class EnhancedPromise extends Promise {
                     },
                     err => {
                         errors.push(err);
-                        if (errors.length >= rejects) {
+                        if (errors.length > rejects) {
                             reject(new Error());
                         }
                     });
